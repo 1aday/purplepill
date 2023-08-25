@@ -2,26 +2,27 @@
 <html>
 <head>
   <title>Image with Sunglasses</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
   <script src="https://unpkg.com/fabric@5.3.0/dist/fabric.min.js"></script>
 </head>
 <body>
-  <h1>Upload an image</h1>
-  <input type="file" id="imageUpload">
-  <canvas id="canvas" width="500" height="500" style="border: 1px solid #ccc;"></canvas>
-  <button id="downloadBtn">Download</button>
-  <script src="script.js"></script>
-  <script> // Initialize Fabric.js canvas
+  <div class="container">
+    <h1>Upload an image</h1>
+    <input type="file" id="imageUpload">
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <button id="downloadBtn">Download</button>
+  </div>
+<script type="text/javascript">// Initialize Fabric.js canvas
 const canvas = new fabric.Canvas('canvas');
 
 // Function to add sunglasses
 const addSunglasses = () => {
-  fabric.Image.fromURL('assets/sunglasses.png', function(img) {
+  fabric.Image.fromURL('https://i.imgur.com/kObuW3f.png', function(img) {
     img.set({
       left: 150,
       top: 350,
       angle: 0,
-      selectable: true,
-      crossOrigin: 'anonymous'  // Add this line
+      selectable: true  // Allow sunglasses to be selectable
     });
     img.scaleToWidth(200);
     canvas.add(img);
@@ -40,20 +41,18 @@ const handleImageUpload = (event) => {
         left: 0,
         top: 0,
         angle: 0,
-        selectable: false,
-        crossOrigin: 'anonymous'  // Add this line
+        selectable: false  // Prevent image from being selectable
       });
       img.scaleToWidth(canvas.getWidth());
       img.scaleToHeight(canvas.getHeight());
       canvas.add(img);
       canvas.sendToBack(img);
-      addSunglasses();
+      addSunglasses();  // Add sunglasses after image is uploaded
     });
   };
   
   reader.readAsDataURL(file);
 };
-
 
 // Add event listener for image upload
 document.getElementById('imageUpload').addEventListener('change', handleImageUpload);
@@ -72,16 +71,92 @@ const downloadImage = () => {
 // Add event listener for the download button
 document.getElementById('downloadBtn').addEventListener('click', downloadImage);
 </script>
-<style> body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+<style type="text/css">/* Reset some default browser styles */
+body, h1, h2, h3, h4, p, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+/* Make a background color for the whole page */
+body {
+  background-color: #121212;  /* Dark background */
+  font-family: Arial, sans-serif;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+/* Add some padding and center-align text in headings */
+h1 {
+  padding: 20px;
+  text-align: center;
+  color: #e44dff;  /* Neon Purple */
+}
+
+/* Style the canvas container */
+#canvas {
+  border: 3px solid #e44dff;  /* Neon Purple */
   margin-top: 20px;
 }
 
-canvas {
-  border: 2px solid black;
+/* Style the file input and button */
+input[type="file"],
+button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #e44dff;  /* Neon Purple */
+  border: none;
+  color: white;
+  border-radius: 5px;
 }
+
+/* Add a hover effect for the button */
+input[type="file"]:hover,
+button:hover {
+  background-color: #ff80ff;  /* Lighter Purple */
+}
+
+/* Style the download button */
+#downloadBtn {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #e44dff;  /* Neon Purple */
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Hover effect for the download button */
+#downloadBtn:hover {
+  background-color: #ff80ff;  /* Lighter Purple */
+}
+
+/* ... existing styles ... */
+
+/* Center the canvas and other elements */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;  /* 100% of the viewport height */
+}
+
+/* Style the canvas container */
+#canvas {
+  border: 3px solid #e44dff;  /* Neon Purple */
+  margin-top: 20px;
+}
+
+/* ... existing styles ... */
+
 </style>
+
 </body>
 </html>
