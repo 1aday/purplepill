@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image with Sunglasses</title>
+  <script src="https://unpkg.com/fabric@5.3.0/dist/fabric.min.js"></script>
+</head>
+<body>
+  <h1>Upload an image</h1>
+  <input type="file" id="imageUpload">
+  <canvas id="canvas" width="500" height="500" style="border: 1px solid #ccc;"></canvas>
+  <button id="downloadBtn">Download</button>
+  <script src="script.js"></script>
+  <script> // Initialize Fabric.js canvas
+const canvas = new fabric.Canvas('canvas');
+
+// Function to add sunglasses
+const addSunglasses = () => {
+  fabric.Image.fromURL('assets/sunglasses.png', function(img) {
+    img.set({
+      left: 150,
+      top: 350,
+      angle: 0,
+      selectable: true,
+      crossOrigin: 'anonymous'  // Add this line
+    });
+    img.scaleToWidth(200);
+    canvas.add(img);
+  });
+};
+
+// Function to handle image upload
+const handleImageUpload = (event) => {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+  
+  reader.onload = function(f) {
+    const data = f.target.result;
+    fabric.Image.fromURL(data, function(img) {
+      img.set({
+        left: 0,
+        top: 0,
+        angle: 0,
+        selectable: false,
+        crossOrigin: 'anonymous'  // Add this line
+      });
+      img.scaleToWidth(canvas.getWidth());
+      img.scaleToHeight(canvas.getHeight());
+      canvas.add(img);
+      canvas.sendToBack(img);
+      addSunglasses();
+    });
+  };
+  
+  reader.readAsDataURL(file);
+};
+
+
+// Add event listener for image upload
+document.getElementById('imageUpload').addEventListener('change', handleImageUpload);
+// Function to download the canvas image
+const downloadImage = () => {
+  const dataURL = canvas.toDataURL({
+    format: 'png',
+    quality: 1
+  });
+  const link = document.createElement('a');
+  link.href = dataURL;
+  link.download = 'image_with_sunglasses.png';
+  link.click();
+};
+
+// Add event listener for the download button
+document.getElementById('downloadBtn').addEventListener('click', downloadImage);
+</script>
+<style> body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+canvas {
+  border: 2px solid black;
+}
+</style>
+</body>
+</html>
