@@ -1,111 +1,45 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html>
 <head>
 <title>Image with Sunglasses</title>
 <link href="styles.css" rel="stylesheet" type="text/css"/>
 <script src="https://unpkg.com/fabric@5.3.0/dist/fabric.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body><h3 class="HeroSection_titleHero__Z9qfp" style="text-align: center;">Take the <span style="color: purple;">Purple Pill</span></h3>
+<body>
+<h3 class="HeroSection_titleHero__Z9qfp" style="text-align: center;">Take the <span style="color: purple;">Purple Pill</span></h3>
 <div class="container">
 <h1>Upload an image</h1>
 <input id="imageUpload" type="file"/>
 <canvas height="500" id="canvas" width="500"></canvas>
-<button id="downloadBtn" style="
-    font-family: Open Sans, sans-serif;
-    font-size: 1.5rem;
-    margin-top: 30px;
-    background: linear-gradient(218deg, rgba(194,71,252,0), #c247fc), rgba(194,71,252,.3);
-    ">Download</button>
+<button id="downloadBtn">Download</button>
 </div>
-<script type="text/javascript">// Initialize Fabric.js canvas
-const canvas = new fabric.Canvas('canvas');
-
-// Function to add sunglasses
-const addSunglasses = () => {
-  fabric.Image.fromURL('assets/sunglasses.png', function(img) {
-    img.set({
-      left: 150,
-      top: 350,
-      angle: 0,
-      selectable: true  // Allow sunglasses to be selectable
-    });
-    img.scaleToWidth(200);
-    canvas.add(img);
-  });
-};
-
-// Function to handle image upload
-const handleImageUpload = (event) => {
-  const file = event.target.files[0];
-  const reader = new FileReader();
-  
-  reader.onload = function(f) {
-    const data = f.target.result;
-    fabric.Image.fromURL(data, function(img) {
-      img.set({
-        left: 0,
-        top: 0,
-        angle: 0,
-        selectable: false  // Prevent image from being selectable
-      });
-      img.scaleToWidth(canvas.getWidth());
-      img.scaleToHeight(canvas.getHeight());
-      canvas.add(img);
-      canvas.sendToBack(img);
-      addSunglasses();  // Add sunglasses after image is uploaded
-    });
-  };
-  
-  reader.readAsDataURL(file);
-};
-
-// Add event listener for image upload
-document.getElementById('imageUpload').addEventListener('change', handleImageUpload);
-// Function to download the canvas image
-const downloadImage = () => {
-  const dataURL = canvas.toDataURL({
-    format: 'png',
-    quality: 1
-  });
-  const link = document.createElement('a');
-  link.href = dataURL;
-  link.download = 'image_with_sunglasses.png';
-  link.click();
-};
-
-// Add event listener for the download button
-document.getElementById('downloadBtn').addEventListener('click', downloadImage);
+<script type="text/javascript">
+// JavaScript code
 </script>
-<style type="text/css">/* Reset some default browser styles */
+<style type="text/css">
 body, h1, h2, h3, h4, p, ul, li {
   margin: 0;
   padding: 0;
 }
-
-/* Make a background color for the whole page */
 body {
-  background-color: #121212;  /* Dark background */
+  background-color: #121212;
   font-family: Arial, sans-serif;
   color: white;
   margin: 0;
   padding: 0;
 }
-
-/* Add some padding and center-align text in headings */
 h1 {
   padding: 20px;
   text-align: center;
-  color: #e44dff;  /* Neon Purple */
+  color: #e44dff;
 }
-
-/* Style the canvas container */
 #canvas {
-  border: 3px solid #e44dff;  /* Neon Purple */
+  border: 3px solid #e44dff;
   margin-top: 20px;
+  max-width: 100%;
 }
-
-/* Style the file input and button */
 input[type="file"],
 button {
   display: block;
@@ -113,58 +47,47 @@ button {
   padding: 10px 20px;
   font-size: 18px;
   cursor: pointer;
-  background-color: #e44dff;  /* Neon Purple */
+  background-color: #e44dff;
   border: none;
   color: white;
   border-radius: 5px;
 }
-
-/* Add a hover effect for the button */
 input[type="file"]:hover,
 button:hover {
-  background-color: #ff80ff;  /* Lighter Purple */
+  background-color: #ff80ff;
 }
-
-/* Style the download button */
 #downloadBtn {
   display: block;
   margin: 20px auto;
   padding: 10px 20px;
-  background-color: #e44dff;  /* Neon Purple */
+  background-color: #e44dff;
   color: white;
   font-size: 18px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
-
-/* Hover effect for the download button */
 #downloadBtn:hover {
-  background-color: #ff80ff;  /* Lighter Purple */
+  background-color: #ff80ff;
 }
 .HeroSection_titleHero__Z9qfp {
-    margin-top:100px;
+    margin-top: 100px;
 }
-
-/* ... existing styles ... */
-
-/* Center the canvas and other elements */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-/*   min-height: 100vh;  /* 100% of the viewport height */ */
+  width: 100%;
+  padding: 0 15px;
+  box-sizing: border-box;
 }
-
-/* Style the canvas container */
-#canvas {
-  border: 3px solid #e44dff;  /* Neon Purple */
-  margin-top: 20px;
+@media only screen and (max-width: 600px) {
+  #canvas {
+    width: 100%;
+    height: auto;
+  }
 }
-
-/* ... existing styles ... */
-
 </style>
 </body>
 </html>
