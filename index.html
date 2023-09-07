@@ -1,17 +1,23 @@
 <!DOCTYPE html>
+
 <html>
 <head>
-  <title>Image with Sunglasses</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
-  <script src="https://unpkg.com/fabric@5.3.0/dist/fabric.min.js"></script>
+<title>Image with Sunglasses</title>
+<link href="styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://unpkg.com/fabric@5.3.0/dist/fabric.min.js"></script>
 </head>
-<body>
-  <div class="container">
-    <h1>Upload an image</h1>
-    <input type="file" id="imageUpload">
-    <canvas id="canvas" width="500" height="500"></canvas>
-    <button id="downloadBtn">Download</button>
-  </div>
+<body><h3 class="HeroSection_titleHero__Z9qfp" style="text-align: center;">Take the <span style="color: purple;">Purple Pill</span></h3>
+<div class="container">
+<h1>Upload an image</h1>
+<input id="imageUpload" type="file"/>
+<canvas height="500" id="canvas" width="500"></canvas>
+<button id="downloadBtn" style="
+    font-family: Open Sans, sans-serif;
+    font-size: 1.5rem;
+    margin-top: 30px;
+    background: linear-gradient(218deg, rgba(194,71,252,0), #c247fc), rgba(194,71,252,.3);
+    ">Download</button>
+</div>
 <script type="text/javascript">// Initialize Fabric.js canvas
 const canvas = new fabric.Canvas('canvas');
 
@@ -157,6 +163,5 @@ button:hover {
 /* ... existing styles ... */
 
 </style>
-
 </body>
 </html>
